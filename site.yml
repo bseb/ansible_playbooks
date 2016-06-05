@@ -1,0 +1,11 @@
+# Site file to deploy configure my various workstations and servers
+---
+
+- name: Apply my personal config and install packages I use frequently for workstations
+  hosts: local 
+  become: yes
+  become_method: sudo
+
+  roles:
+    - base
+

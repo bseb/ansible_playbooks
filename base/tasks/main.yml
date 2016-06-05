@@ -1,0 +1,23 @@
+# Execute base tasks
+
+- name: Add PPAs for packages I use frequently
+  apt_repository: repo={{ item }} state=present update_cache=yes
+  with_items:
+    - '{{ ppas }}'
+
+- name: Install Packages
+  package: name={{ item }} state=latest
+  with_items:
+    - '{{ packages }}'
+
+- name: Copy Dotfiles
+  copy: src={{ item }} dest=/home/ben/.{{ item }} owner=ben
+  with_items:
+    - '{{ dotfiles}}'
+
+- name: Checkout oh-my-zsh
+  git: repo='https://github.com/robbyrussell/oh-my-zsh.git' dest=/home/ben/.oh-my-zsh
+
+- name: Install Vundle
+  git: repo='https://github.com/VundleVim/Vundle.vim.git' dest=/home/ben/.vim/bundle/Vundle.vim
+

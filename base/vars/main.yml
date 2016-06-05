@@ -1,0 +1,31 @@
+# Variables for base role
+---
+
+ppas:
+  - 'deb http://dl.google.com/linux/chrome/deb/ stable main'
+  - 'ppa:atareao/telegram'
+  - 'ppa:webupd8team/atom'
+  - 'ppa:ansible/ansible'
+
+
+packages:
+  - google-chrome-stable
+  - zsh
+  - tmux
+  - screen
+  - telegram
+  - atom
+  - ansible
+  - vagrant
+  - fonts-hack-ttf
+  - ipython
+  - python-pip
+
+
+dotfiles:
+  - zshrc
+  - screenrc
+  - bashrc
+  - vimrc
+  - tmux.conf
+
