@@ -2,10 +2,10 @@
 ---
 
 - name: Apply my personal config and install packages I use frequently for workstations
-  hosts: local 
+  hosts: desktop
   become: yes
   become_method: sudo
 
-  roles:
-    - base
 
+  roles:
+    - { role: 'ubuntu_desktop', when: ansible_distribution == 'Ubuntu' }
