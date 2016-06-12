@@ -1,0 +1,40 @@
+# Variables for Arch Desktop role
+---
+
+
+pacman_packages:
+  - xorg-server
+  - gnome
+  - gnome-extra
+  - zsh
+  - tmux
+  - screen
+  - ansible
+  - vagrant
+  - ipython
+  - python-pip
+  - vim
+  - docker
+  - sudo
+  - git 
+  - expac
+  - yajl
+
+
+
+
+dotfiles:
+  - zshrc
+  - screenrc
+  - bashrc
+  - vimrc
+  - tmux.conf
+
+
+services:
+  - gdm
+  - docker
+
+pacaur_tarballs:
+  - https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
+  - https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz

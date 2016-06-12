@@ -1,0 +1,32 @@
+
+- name: Install Packages
+  pacman: name={{ item }} state=latest
+  with_items:
+    - '{{ pacman_packages }}'
+
+- name: Configure my user and set shell to zsh
+  user: name=ben shell=/usr/bin/zsh home=/home/ben state=present 
+  
+- name: Copy Dotfiles
+  copy: src={{ item }} dest=/home/ben/.{{ item }} owner=ben
+  with_items:
+    - '{{ dotfiles}}'
+
+- name: Checkout oh-my-zsh
+  git: repo='https://github.com/robbyrussell/oh-my-zsh.git' dest=/home/ben/.oh-my-zsh owner=ben group=ben
+
+- name: Install Vundle
+  git: repo='https://github.com/VundleVim/Vundle.vim.git' dest=/home/ben/.vim/bundle/Vundle.vim owner=ben group=ben
+
+- name: Grab Tarballs for pacaur
+  unarchive: copy=no src={{ item }} dest=/tmp owner=ben
+  with_items:
+    - '{{ pacaur_tarballs }}' 
+
+
+- name: Make Cower and Pacaur packages
+  command: 'makepkg -sri /tmp/{{ item }}/PKGBUILD --nogpgcheck'
+  with_items:
+    - cower
+    - pacaur
+

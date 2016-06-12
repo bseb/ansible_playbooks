@@ -1,9 +1,11 @@
-# Execute base tasks
 
 - name: Add PPAs for packages I use frequently
   apt_repository: repo={{ item }} state=present update_cache=yes
   with_items:
     - '{{ ppas }}'
+
+- name: Configure my user and set shell to zsh
+  user: name=ben shell=/usr/bin/zsh home=/home/ben state=present 
 
 - name: Install Packages
   package: name={{ item }} state=latest
