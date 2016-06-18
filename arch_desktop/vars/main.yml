@@ -1,6 +1,6 @@
 # Variables for Arch Desktop role
 ---
-
+ansible_python_interpreter: /usr/bin/python2
 
 pacman_packages:
   - xorg-server
@@ -19,6 +19,7 @@ pacman_packages:
   - git 
   - expac
   - yajl
+  - ttf-hack
 
 
 
@@ -38,3 +39,10 @@ services:
 pacaur_tarballs:
   - https://aur.archlinux.org/cgit/aur.git/snapshot/cower.tar.gz
   - https://aur.archlinux.org/cgit/aur.git/snapshot/pacaur.tar.gz
+
+
+pacaur_packages:
+  - google-chrome
+  - atom-editor
+  - telegram-desktop-bin
+  

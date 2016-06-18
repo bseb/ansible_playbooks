@@ -1,32 +1,46 @@
 
 - name: Install Packages
-  pacman: name={{ item }} state=latest
+  pacman: name={{ item }} state=latest update_cache=yes
   with_items:
     - '{{ pacman_packages }}'
 
 - name: Configure my user and set shell to zsh
   user: name=ben shell=/usr/bin/zsh home=/home/ben state=present 
   
+- name: Add me to sudoers
+  lineinfile: dest=/etc/sudoers line='ben     ALL=(ALL) NOPASSWD:ALL'  
+
+
 - name: Copy Dotfiles
   copy: src={{ item }} dest=/home/ben/.{{ item }} owner=ben
   with_items:
     - '{{ dotfiles}}'
 
 - name: Checkout oh-my-zsh
-  git: repo='https://github.com/robbyrussell/oh-my-zsh.git' dest=/home/ben/.oh-my-zsh owner=ben group=ben
+  git: repo='https://github.com/robbyrussell/oh-my-zsh.git' dest=/home/ben/.oh-my-zsh 
 
 - name: Install Vundle
-  git: repo='https://github.com/VundleVim/Vundle.vim.git' dest=/home/ben/.vim/bundle/Vundle.vim owner=ben group=ben
+  git: repo='https://github.com/VundleVim/Vundle.vim.git' dest=/home/ben/.vim/bundle/Vundle.vim 
 
 - name: Grab Tarballs for pacaur
   unarchive: copy=no src={{ item }} dest=/tmp owner=ben
   with_items:
     - '{{ pacaur_tarballs }}' 
 
+- name: Run pacaur install script
+  script: files/pacaur_install.sh
+  become: yes
+  become_user: ben
 
-- name: Make Cower and Pacaur packages
-  command: 'makepkg -sri /tmp/{{ item }}/PKGBUILD --nogpgcheck'
+#There is not yet a pacaur module.. might have to fix that
+
+- name: Install Aur packages
+  command: /usr/bin/pacaur -S  --noconfirm --noedit  '{{ pacaur_packages }}' 
+  ignore_errors: yes
+
+- name: Enable Services 
+  service: name={{ item }} enabled=yes
   with_items:
-    - cower
-    - pacaur
+    - '{{ services}}'
+
 
