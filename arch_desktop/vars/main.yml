@@ -22,16 +22,6 @@ pacman_packages:
   - ttf-hack
 
 
-
-
-dotfiles:
-  - zshrc
-  - screenrc
-  - bashrc
-  - vimrc
-  - tmux.conf
-
-
 services:
   - gdm
   - docker

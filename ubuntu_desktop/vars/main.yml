@@ -22,10 +22,3 @@ packages:
   - python-pip
 
 
-dotfiles:
-  - zshrc
-  - screenrc
-  - bashrc
-  - vimrc
-  - tmux.conf
-

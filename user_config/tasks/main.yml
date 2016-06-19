@@ -1,0 +1,22 @@
+---
+
+- name: Configure my user and set shell to zsh
+  user: name=ben shell=/usr/bin/zsh home=/home/ben state=present 
+  
+- name: Add me to sudoers
+  lineinfile: dest=/etc/sudoers line='ben     ALL=(ALL) NOPASSWD:ALL'  
+
+
+- name: Copy Dotfiles
+  copy: src={{ item }} dest=/home/ben/.{{ item }} owner=ben group=ben
+  with_items:
+    - '{{ dotfiles}}'
+
+- name: Checkout oh-my-zsh
+  git: repo='https://github.com/robbyrussell/oh-my-zsh.git' dest=/home/ben/.oh-my-zsh 
+
+- name: Install Vundle
+  git: repo='https://github.com/VundleVim/Vundle.vim.git' dest=/home/ben/.vim/bundle/Vundle.vim 
+
+- name: Set permissions on home dir
+  file: name=/home/ben owner=ben group=ben state=directory recurse=yes

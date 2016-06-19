@@ -4,22 +4,9 @@
   with_items:
     - '{{ ppas }}'
 
-- name: Configure my user and set shell to zsh
-  user: name=ben shell=/usr/bin/zsh home=/home/ben state=present 
 
 - name: Install Packages
   package: name={{ item }} state=latest
   with_items:
     - '{{ packages }}'
-
-- name: Copy Dotfiles
-  copy: src={{ item }} dest=/home/ben/.{{ item }} owner=ben
-  with_items:
-    - '{{ dotfiles}}'
-
-- name: Checkout oh-my-zsh
-  git: repo='https://github.com/robbyrussell/oh-my-zsh.git' dest=/home/ben/.oh-my-zsh
-
-- name: Install Vundle
-  git: repo='https://github.com/VundleVim/Vundle.vim.git' dest=/home/ben/.vim/bundle/Vundle.vim
 
