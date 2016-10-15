@@ -97,7 +97,6 @@ setxkbmap -option ctrl:nocaps
 export LC_ALL=en_US.UTF-8
 #Term Settings
 export TERM=xterm-256color
-[ -n "$TMUX" ] && export TERM=screen-256color
 # The following to fix home,end,etc. This stolen from the zsh page on the Arch wiki
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo

@@ -9,7 +9,6 @@ ppas:
 
 
 packages:
-  - google-chrome-stable
   - zsh
   - tmux
   - screen

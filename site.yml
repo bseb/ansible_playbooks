@@ -12,4 +12,3 @@
     - { role: 'ubuntu_desktop', when: ansible_distribution == 'Ubuntu' }
     - { role: 'arch_desktop', when: ansible_distribution == 'Archlinux' }
       #For Arch, Make sure to set the host variable ansible_python_interperter=/usr/bin/python2
-
